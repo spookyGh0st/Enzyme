@@ -462,12 +462,6 @@ def : CallPattern<(Op $x),
                   [ReadNone, NoUnwind]              
                   >;
 def : CallPattern<(Op $x),
-                  ["acos", "acosf", "acosl", "__nv_acos", "__nv_acosf", "__nv_acosl"],
-                  [(FNeg (FDiv (DiffeRet), (Intrinsic<"sqrt"> (FSub (ConstantFP<"1.0"> $x), (FMul $x, $x)))  ))],
-                  (ForwardFromSummedReverse),
-                  [ReadNone, NoUnwind]
-                  >;
-def : CallPattern<(Op $x),
                   ["log1p", "log1pf", "log1pl"],
                   [(FDiv (DiffeRet), (FAdd $x, (ConstantFP<"1.0"> $x)))],
                   (ForwardFromSummedReverse),
@@ -945,6 +939,12 @@ def : IntrPattern<(Op $x),
                   [["cos"]],
                   [(FMul (DiffeRet), (FNeg (Intrinsic<"sin"> $x)))]       ,
                   (ForwardFromSummedReverse)           
+                  >;
+
+def : IntrPattern<(Op $x),
+                  [["acos"]],
+                  [(FNeg (FDiv (DiffeRet), (Intrinsic<"sqrt"> (FSub (ConstantFP<"1.0"> $x), (FMul $x, $x)))  ))],
+                  (ForwardFromSummedReverse)
                   >;
 
 def : IntrPattern<(Op $x),

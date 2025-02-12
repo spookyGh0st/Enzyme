@@ -99,7 +99,7 @@ const llvm::StringMap<llvm::Intrinsic::ID> LIBM_FUNCTIONS = {
     {"cos", Intrinsic::cos},
     {"sin", Intrinsic::sin},
     {"tan", Intrinsic::not_intrinsic},
-    {"acos", Intrinsic::not_intrinsic},
+    {"acos", Intrinsic::acos},
     {"__nv_frcp_rd", Intrinsic::not_intrinsic},
     {"__nv_frcp_rn", Intrinsic::not_intrinsic},
     {"__nv_frcp_ru", Intrinsic::not_intrinsic},
